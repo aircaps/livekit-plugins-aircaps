@@ -1,0 +1,79 @@
+[project]
+name = "livekit-plugins-aircaps"
+dynamic = ["version"]
+description = "AirCaps Live speech-to-text for LiveKit Agents"
+readme = "README.md"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+requires-python = ">=3.10.0"
+authors = [{ name = "AirCaps" }]
+keywords = ["livekit", "agents", "webrtc", "realtime", "audio", "speech-to-text", "stt", "aircaps"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3 :: Only",
+    "Topic :: Multimedia :: Sound/Audio :: Speech",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Typing :: Typed",
+]
+dependencies = ["livekit-agents>=1.8.13,<2"]
+
+[project.urls]
+Homepage = "https://aircaps.ai"
+Documentation = "https://aircaps.ai/docs/guides/live-1"
+Repository = "https://github.com/aircaps/livekit-plugins-aircaps"
+Issues = "https://github.com/aircaps/livekit-plugins-aircaps/issues"
+Changelog = "https://github.com/aircaps/livekit-plugins-aircaps/blob/main/CHANGELOG.md"
+
+[project.optional-dependencies]
+example = ["livekit-agents[silero]>=1.8.13,<2", "python-dotenv"]
+
+[dependency-groups]
+dev = ["pytest>=8", "pytest-asyncio>=0.24", "ruff>=0.9", "mypy>=1.13"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.version]
+path = "livekit/plugins/aircaps/version.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["livekit"]
+
+[tool.hatch.build.targets.sdist]
+include = ["/livekit", "/tests", "/examples", "/README.md", "/CHANGELOG.md", "/LICENSE"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+# the same rules as livekit/agents
+select = ["E", "W", "F", "I", "B", "C4", "UP", "RUF006", "RUF018"]
+ignore = ["E501"]
+
+[tool.ruff.lint.isort]
+combine-as-imports = true
+known-first-party = ["livekit"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.mypy]
+# aiohttp's types need 3.12+ to check (livekit/agents type-checks on 3.12+ too)
+python_version = "3.12"
+strict = true
+disallow_any_generics = false
+packages = ["livekit.plugins.aircaps"]
+explicit_package_bases = true
