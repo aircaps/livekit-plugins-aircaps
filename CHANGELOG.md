@@ -6,6 +6,16 @@ All notable changes to this project are documented here. The format follows
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-11-19
+
+### Fixed
+
+- `STT.aclose()` closes every stream the STT opened. Before, open streams kept their WebSocket and keepalive running
+  until each was closed on its own. The shared HTTP session stays open.
+- The audio that queued while a session connected is cut at the sample: a frame across the 1.25 s cutoff keeps its
+  newest samples. Before, such a frame was dropped whole, so a single frame longer than 1.25 s pushed before the
+  session was ready sent no audio.
+
 ## [0.1.0] - 2026-11-19
 
 ### Added
@@ -24,5 +34,6 @@ All notable changes to this project are documented here. The format follows
 
 Tested with LiveKit Agents 1.8.13.
 
-[Unreleased]: https://github.com/aircaps/livekit-plugins-aircaps/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/aircaps/livekit-plugins-aircaps/compare/v0.1.1...HEAD
+[0.1.1]: https://github.com/aircaps/livekit-plugins-aircaps/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/aircaps/livekit-plugins-aircaps/releases/tag/v0.1.0
