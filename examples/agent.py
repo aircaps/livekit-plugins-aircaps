@@ -1,13 +1,13 @@
 """A voice agent that listens with AirCaps Live 1.
 
-LiveKit's basic voice agent with AirCaps as its speech-to-text; the LLM and the voice come from LiveKit Inference.
+LiveKit's basic voice agent with AirCaps AI as its speech-to-text; the LLM and the voice come from LiveKit Inference.
 
     uv sync --extra example
     uv run examples/agent.py console      # talk to it in the terminal
     uv run examples/agent.py dev          # or join it from a LiveKit room
 
 Set AIRCAPS_API_KEY, and LIVEKIT_URL, LIVEKIT_API_KEY and LIVEKIT_API_SECRET for your LiveKit project (in .env).
-Set AIRCAPS_END_OF_TURN=1 to let the AirCaps model decide when each turn ends.
+Set AIRCAPS_END_OF_TURN=1 to let the AirCaps AI model decide when each turn ends.
 """
 
 import os
@@ -51,7 +51,7 @@ async def entrypoint(ctx: JobContext) -> None:
         llm=inference.LLM("openai/gpt-4.1-mini"),
         tts=inference.TTS("cartesia/sonic-3", voice="9626c31c-bec5-4cca-baa8-f8ba9e84c8bc"),
         vad=silero.VAD.load(),
-        # With AirCaps end of turn, the model's decision already includes the user's pause:
+        # With the model's end of turn, its decision already includes the user's pause:
         # LiveKit adds no delay of its own.
         turn_handling=TurnHandlingOptions(turn_detection="stt", endpointing={"min_delay": 0})
         if END_OF_TURN

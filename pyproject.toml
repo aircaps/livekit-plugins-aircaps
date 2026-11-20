@@ -1,12 +1,12 @@
 [project]
 name = "livekit-plugins-aircaps"
 dynamic = ["version"]
-description = "AirCaps Live speech-to-text for LiveKit Agents"
+description = "AirCaps Live 1 speech-to-text from AirCaps AI for LiveKit Agents"
 readme = "README.md"
 license = "Apache-2.0"
 license-files = ["LICENSE"]
 requires-python = ">=3.10.0"
-authors = [{ name = "AirCaps" }]
+authors = [{ name = "AirCaps AI" }]
 keywords = ["livekit", "agents", "webrtc", "realtime", "audio", "speech-to-text", "stt", "aircaps"]
 classifiers = [
     "Development Status :: 4 - Beta",
